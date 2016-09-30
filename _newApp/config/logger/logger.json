@@ -5,8 +5,7 @@
     "FileLogger": [
         {
             "Key": "fileLoggerDefault",
-            "Path": "/var/log/{APP_NAME}/",
-<<<<<<< HEAD
+            "Path": "/var/log/{APP_NAME}/"
             "FileNamePrefix": "api-",
             "FormatType" : "json"
         }
@@ -16,10 +15,4 @@
       "LogQSize":20,
       "FlushInterval":10
    }
-=======
-            "FormatType" : "json",
-            "FileNamePrefix": "api-"       
-        }       
-    ]
->>>>>>> master
 }
