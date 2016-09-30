@@ -1,4 +1,4 @@
-package collections
+package stack
 
 //Element for the Stack
 type element struct {
