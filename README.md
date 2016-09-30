@@ -31,7 +31,7 @@ All the backend microservices in Jabong are written on top of `florest`. Refer t
 
 ## Usage
 
-* Clone the repo:-
+* Get the repo:-
 
   ```bash
   go get github.com/jabong/florest-core
