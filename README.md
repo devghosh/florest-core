@@ -1,8 +1,22 @@
 # `florest`
 
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Build Status](https://travis-ci.org/jabong/florest-core.svg?branch=master)](https://travis-ci.org/jabong/florest-core) [![Go Report Card](https://goreportcard.com/badge/jabong/florest-core)](https://goreportcard.com/report/github.com/jabong/florest-core) [![Coverage Status](https://coveralls.io/repos/github/jabong/florest-core/badge.svg?branch=master)](https://coveralls.io/github/jabong/florest-core) [![GoDoc](https://godoc.org/github.com/jabong/florest-core/src?status.svg)](https://godoc.org/github.com/jabong/florest-core/src) [![Join the chat at https://gitter.im/florestcore/Lobby](https://badges.gitter.im/florestcore/Lobby.svg)](https://gitter.im/florestcore/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Flo(w)Rest is a workflow based REST API framework. Each request to the REST api (defined) triggers a workflow consisting of different nodes and the request data flows through each one of them in the way that they are connected to each other.
 
 All the backend microservices in Jabong are written on top of `florest`. Refer the [wiki](https://github.com/jabong/florest-core/wiki) for the detailed explanation. 
+
+# Features
+ * [Customized Workflow](https://github.com/jabong/florest-core/wiki/Workflow#workflow-definition)
+ * [A/B Test](https://github.com/jabong/florest-core/wiki/A-B-Test)
+ * [Dynamic Config](https://github.com/jabong/florest-core/wiki/Configuration#dynamic-config)
+ * [Logger](https://github.com/jabong/florest-core/wiki/Logger)
+ * [Monitor](https://github.com/jabong/florest-core/wiki/Monitor)
+ * [Profiler](https://github.com/jabong/florest-core/wiki/Profiler)
+ * [Database & Cache Adapters](https://github.com/jabong/florest-core/wiki/Components)
+ * [Worker Pool](https://github.com/jabong/florest-core/wiki/Worker-Pool)
+ * [HTTP Utilities e.g connection pool](https://github.com/jabong/florest-core/wiki/HTTP-Utilities)
+ * [Swagger](https://github.com/jabong/florest-core/wiki/Swagger) 
 
 # Pre-requisites
 
@@ -37,7 +51,7 @@ All the backend microservices in Jabong are written on top of `florest`. Refer t
 
   ```bash
   sudo mkdir /var/log/restapi/          # This can be changed
-  chown <user who will be executing the app> /var/log/florest
+  chown <user who will be executing the app> /var/log/restapi
   ```
   
 * To build the application execute the below command:-
@@ -88,18 +102,23 @@ All the backend microservices in Jabong are written on top of `florest`. Refer t
 To run the examples execute the below command:-
 
 ```go
-go get -u github.com/jabong/florest-core/examples
+go get -u github.com/jabong/florest-core/src/examples
 ```
 
-The above command will place the `examples` binary in `$GOROOT/bin` directory.
+The above command will place the `examples` binary in `$GOPATH/bin` directory.
 
-To execute the examples create a conf file named [conf.json](config/florest-core/conf.json) & [logger.json](config/florest-core/logger.json) and place it in `conf/` in the same folder where `examples` binary is placed.
+To execute the examples create a conf file named [conf.json](config/florest-core/conf.json) & [logger.json](config/logger/logger.json) and place it in `conf/` in the same folder where `examples` binary is placed.
 
-To run the hello world example execute the below command
+**NOTE** - In `logger.json` replace `{LOGLEVEL}` with the loglevel specified in [logger_constants](src/common/logger/logger_constants.go). For example if we want log level to be `info` specify `4` in `{LOGLEVEL}`.
 
-```bash
-curl -XGET "http://localhost:8080/florest/v1/hello/"
-```
+To run the hello world example:- 
+
+* Start the server by executing `./examples` from `$GOPATH/bin` directory
+* Send a GET request:-
+
+  ```bash
+  curl -XGET "http://localhost:8080/florest/v1/hello/"
+  ```
 
 This should produce an output like below:-
 
