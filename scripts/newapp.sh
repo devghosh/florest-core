@@ -5,6 +5,15 @@ project_path=${2%/}
 
 project_name=$(basename $project_path)
 
+# create project dir, if not present
+mkdir -p $project_path
+
+# exit if failed to create project dir
+if [! -d $project_path ]; then
+  echo "failed to create directory:$project_path"
+  exit
+fi
+
 # Copy the new app source code
 echo building new app
 cp -r -f "$florest_path/_newApp"/* $project_path
