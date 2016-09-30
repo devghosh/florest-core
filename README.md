@@ -34,16 +34,14 @@ All the backend microservices in Jabong are written on top of `florest`. Refer t
 * Clone the repo:-
 
   ```bash
-  cd <GOPROJECTSPATH>
-  git clone https://github.com/jabong/florest-core
+  go get github.com/jabong/florest-core
   ```
 
 * Bootstrap the new application to be created from `florest`
   Let's assume `APPDIR` is the absolute location where new application's code will reside. For example, let's say the new application to be created is named `restapi` to be placed in `/Users/tuk/golang/src/github.com/jabong/` then `APPDIR` denotes the location `/Users/tuk/golang/src/github.com/jabong/restapi`
  
   ```bash
-  cd <GOPROJECTSPATH>/florest-core
-  make newapp NEWAPP="APPDIR"  
+  florest-core -projectPath APPDIR  
   ```
   The above will create a new app based on `florest` with the necessary structure.  
   

@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 
 florest_path=$1
 project_path=${2%/}
@@ -9,7 +9,7 @@ project_name=$(basename $project_path)
 mkdir -p $project_path
 
 # exit if failed to create project dir
-if [! -d $project_path ]; then
+if [ ! -d $project_path ]; then
   echo "failed to create directory:$project_path"
   exit
 fi

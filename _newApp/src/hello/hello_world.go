@@ -1,8 +1,6 @@
 package hello
 
 import (
-	errors "common/appconstant"
-
 	florest_constants "github.com/jabong/florest-core/src/common/constants"
 	workflow "github.com/jabong/florest-core/src/core/common/orchestrator"
 )
@@ -25,5 +23,6 @@ func (a HelloWorld) Name() string {
 
 func (a HelloWorld) Execute(io workflow.WorkFlowData) (workflow.WorkFlowData, error) {
 	//Business Logic
-	return io, &florest_constants.AppError{Code: errors.FunctionalityNotImplementedErrorCode, Message: "invalid request"}
+	io.IOData.Set(florest_constants.Result, "Hello World")
+	return io, nil
 }
