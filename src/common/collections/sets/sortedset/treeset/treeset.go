@@ -75,6 +75,24 @@ func (set *Set) Values() []interface{} {
 	return set.tree.Keys()
 }
 
+// Min returns the minimum key and its value from the tree map.
+// Returns nil, nil if map is empty.
+func (set *Set) First() interface{} {
+	if node := set.tree.Left(); node != nil {
+		return node.Key
+	}
+	return nil
+}
+
+// Max returns the maximum key and its value from the tree map.
+// Returns nil, nil if map is empty.
+func (set *Set) Last() interface{} {
+	if node := set.tree.Right(); node != nil {
+		return node.Key
+	}
+	return nil
+}
+
 // Iterator holding the iterator's state
 func (set *Set) Iterator() collections.Iterator {
 	return &Iterator{index: 0, rbIterator: set.tree.Iterator()}

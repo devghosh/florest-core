@@ -1,14 +1,3 @@
-// Copyright (c) 2015, Emir Pasic. All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
-// Package hashmap implements a map backed by a hash table.
-//
-// Elements are unordered in the map.
-//
-// Structure is not thread safe.
-//
-// Reference: http://en.wikipedia.org/wiki/Associative_array
 package hashmap
 
 import (
@@ -25,12 +14,12 @@ func New() *Map {
 	return &Map{m: make(map[interface{}]interface{})}
 }
 
-// Put inserts element into the map.
+// Put inserts an element into the map.
 func (m *Map) Put(key interface{}, value interface{}) {
 	m.m[key] = value
 }
 
-// Get searches the element in the map by key and returns its value or nil if key is not found in map.
+// Get searches the element in the map by key and returns its value or nil if key doesn't exists.
 // Second return parameter is true if key was found, otherwise false.
 func (m *Map) Get(key interface{}) (value interface{}, found bool) {
 	value, found = m.m[key]
@@ -42,7 +31,7 @@ func (m *Map) Remove(key interface{}) {
 	delete(m.m, key)
 }
 
-// Empty returns true if map does not contain any elements
+// IsEmpty returns true if map does not contain any elements
 func (m *Map) IsEmpty() bool {
 	return m.Size() == 0
 }
@@ -52,24 +41,29 @@ func (m *Map) Size() int {
 	return len(m.m)
 }
 
-// Keys returns all keys (random order).
+// Keys returns all keys of the map(random order).
 func (m *Map) Keys() []interface{} {
 	keys := make([]interface{}, m.Size())
+	index := 0
 	for key, _ := range m.m {
-		keys = append(keys, key)
+		keys[index] = key
+		index++
 	}
 	return keys
 }
 
-// Values returns all values (random order).
+// Values returns all values of the map (random order).
 func (m *Map) Values() []interface{} {
 	values := make([]interface{}, m.Size())
+	index := 0
 	for _, value := range m.m {
-		values = append(values, value)
+		values[index] = value
+		index++
 	}
 	return values
 }
 
+// Returns true if the given keys are found in the map
 func (m *Map) Contains(keys ...interface{}) bool {
 	for _, key := range keys {
 		_, found := m.m[key]

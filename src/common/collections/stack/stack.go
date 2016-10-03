@@ -51,9 +51,11 @@ func (s *Stack) Clear() {
 func (s *Stack) Values() []interface{} {
 	current := s.top
 	values := make([]interface{}, s.size)
+	index := 0
 	for current != nil {
-		values = append(values, current)
+		values[index] = current.value
 		current = current.next
+		index++
 	}
 	return values
 }

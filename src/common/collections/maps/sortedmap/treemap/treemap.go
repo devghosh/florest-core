@@ -1,14 +1,3 @@
-// Copyright (c) 2015, Emir Pasic. All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
-// Package treemap implements a map backed by red-black tree.
-//
-// Elements are ordered by key in the map.
-//
-// Structure is not thread safe.
-//
-// Reference: http://en.wikipedia.org/wiki/Associative_array
 package treemap
 
 import (
@@ -52,25 +41,23 @@ func (m *Map) Keys() []interface{} {
 	return m.tree.Keys()
 }
 
-// Min returns the minimum key and its value from the tree map.
-// Returns nil, nil if map is empty.
-func (m *Map) FirstKey() interface{} {
+// First returns the first(min) entry in the map
+func (m *Map) First() *collections.Entry {
 	if node := m.tree.Left(); node != nil {
-		return node.Key
+		return collections.NewEntry(node.Key, node.Value)
 	}
 	return nil
 }
 
-// Max returns the maximum key and its value from the tree map.
-// Returns nil, nil if map is empty.
-func (m *Map) LastKey() interface{} {
+// Last returns the last(max) entry in the map
+func (m *Map) Last() *collections.Entry {
 	if node := m.tree.Right(); node != nil {
-		return node.Key
+		return collections.NewEntry(node.Key, node.Value)
 	}
 	return nil
 }
 
-// Empty returns true if map does not contain any elements
+// IsEmpty returns true if the map does not contain any elements
 func (m *Map) IsEmpty() bool {
 	return m.tree.IsEmpty()
 }
@@ -90,11 +77,12 @@ func (m *Map) Clear() {
 	m.tree.Clear()
 }
 
+// Returns true if the given keys are found in the map
 func (m *Map) Contains(keys ...interface{}) bool {
-	return m.tree.Contains(keys)
+	return m.tree.Contains(keys...)
 }
 
-// Iterator returns a stateful iterator whose elements are key/value pairs.
+// Iterator returns a stateful iterator used for iterating over all the entries of the map
 func (m *Map) Iterator() collections.Iterator {
 	return &Iterator{rbIterator: m.tree.Iterator()}
 }

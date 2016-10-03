@@ -36,7 +36,7 @@ func (set *Set) Remove(items ...interface{}) {
 // All items have to be present in the set for the method to return true.
 // Returns true if no arguments are passed at all, i.e. set is always superset of empty set.
 func (set *Set) Contains(items ...interface{}) bool {
-	return set.items.Contains(items)
+	return set.items.Contains(items...)
 }
 
 // Empty returns true if map does not contain any elements

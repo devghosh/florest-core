@@ -71,8 +71,10 @@ func (set *Set) Clear() {
 // Values returns all items in the set.
 func (set *Set) Values() []interface{} {
 	values := make([]interface{}, set.Size())
+	index := 0
 	for item, _ := range set.items {
-		values = append(values, item)
+		values[index] = item
+		index++
 	}
 	return values
 }
