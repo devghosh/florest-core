@@ -1,12 +1,18 @@
 package comparators
 
+//stringComparator for comparing the string values
 type StringComparator struct {
 }
 
+//Returns the new string comparator
 func NewStringComparator() *StringComparator {
 	return &StringComparator{}
 }
 
+// Compares two string values and returns
+// 0 if a = b
+// -1 if a < b
+// 1 if a > b
 func (comparator *StringComparator) Compare(a, b interface{}) int {
 	s1 := a.(string)
 	s2 := b.(string)

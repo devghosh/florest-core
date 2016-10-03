@@ -1,12 +1,18 @@
 package comparators
 
+//uint64Comparator for comparing the uint64 values
 type UInt64Comparator struct {
 }
 
+//Returns the new uint64 comparator
 func NewUInt64Comparator() *UInt64Comparator {
 	return &UInt64Comparator{}
 }
 
+// Compares two uint64 values and returns
+// 0 if a = b
+// -1 if a < b
+// 1 if a > b
 func (comparator *UInt64Comparator) Compare(a, b interface{}) int {
 	aAsserted := a.(uint64)
 	bAsserted := b.(uint64)

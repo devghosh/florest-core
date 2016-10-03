@@ -1,12 +1,18 @@
 package comparators
 
+//ByteComparator for comparing the byte values
 type ByteComparator struct {
 }
 
+//Returns the new byte comparator
 func NewByteComparator() *ByteComparator {
 	return &ByteComparator{}
 }
 
+// Compares two byte values and returns
+// 0 if a = b
+// -1 if a < b
+// 1 if a > b
 func (comparator *ByteComparator) Compare(a, b interface{}) int {
 	aAsserted := a.(byte)
 	bAsserted := b.(byte)

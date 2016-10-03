@@ -1,12 +1,18 @@
 package comparators
 
+//uintComparator for comparing the uint values
 type UIntComparator struct {
 }
 
+//Returns the new uint comparator
 func NewUIntComparator() *UIntComparator {
 	return &UIntComparator{}
 }
 
+// Compares two uint values and returns
+// 0 if a = b
+// -1 if a < b
+// 1 if a > b
 func (comparator *UIntComparator) Compare(a, b interface{}) int {
 	aAsserted := a.(uint)
 	bAsserted := b.(uint)
