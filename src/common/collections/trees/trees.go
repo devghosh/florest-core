@@ -1,27 +1,22 @@
-// Copyright (c) 2015, Emir Pasic. All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
-// Package trees provides an abstract Tree interface.
-//
-// In computer science, a tree is a widely used abstract data type (ADT) or data structure implementing this ADT that simulates a hierarchical tree structure, with a root value and subtrees of children with a parent node, represented as a set of linked nodes.
-//
-// Reference: https://en.wikipedia.org/wiki/Tree_%28data_structure%29
 package trees
 
 import "github.com/jabong/florest-core/src/common/collections"
 
 // Tree interface that all trees implement
 type Tree interface {
+	// Put inserts an element into the tree.
 	Put(key interface{}, value interface{})
+	// Get searches the element in the tree by key and returns its value or nil if key doesn't exists.
+	// Second return parameter is true if key was found, otherwise false.
 	Get(key interface{}) (value interface{}, found bool)
+	// Remove removes the element from the tree by key.
 	Remove(key interface{})
+	// Keys returns all keys of the element
+	// random order or
+	// insertion order if the map is iterable or
+	// Sorted order if the map is comparable
 	Keys() []interface{}
 
+	// extends Collection interface
 	collections.Collection
-	// Empty() bool
-	// Size() int
-	// Clear()
-	// Values() []interface{}
-	// Contains([] interface{}) bool
 }

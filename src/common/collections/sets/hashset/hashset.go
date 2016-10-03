@@ -1,12 +1,3 @@
-// Copyright (c) 2015, Emir Pasic. All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
-// Package hashset implements a set backed by a hash table.
-//
-// Structure is not thread safe.
-//
-// References: http://en.wikipedia.org/wiki/Set_%28abstract_data_type%29
 package hashset
 
 import (
@@ -19,6 +10,7 @@ type Set struct {
 	items map[interface{}]struct{}
 }
 
+// An empty struct - Refer http://dave.cheney.net/2014/03/25/the-empty-struct
 var itemExists = struct{}{}
 
 // New instantiates a new empty set
@@ -26,23 +18,21 @@ func New() *Set {
 	return &Set{items: make(map[interface{}]struct{})}
 }
 
-// Add adds the items (one or more) to the set.
+// Add adds one or more items to the set.
 func (set *Set) Add(items ...interface{}) {
 	for _, item := range items {
 		set.items[item] = itemExists
 	}
 }
 
-// Remove removes the items (one or more) from the set.
+// Remove removes one or more items from the set.
 func (set *Set) Remove(items ...interface{}) {
 	for _, item := range items {
 		delete(set.items, item)
 	}
 }
 
-// Contains check if items (one or more) are present in the set.
-// All items have to be present in the set for the method to return true.
-// Returns true if no arguments are passed at all, i.e. set is always superset of empty set.
+// Returns true if the given items are found in the set
 func (set *Set) Contains(items ...interface{}) bool {
 	for _, item := range items {
 		_, found := set.items[item]
@@ -53,7 +43,7 @@ func (set *Set) Contains(items ...interface{}) bool {
 	return true
 }
 
-// Empty returns true if set does not contain any elements.
+// IsEmpty returns true if the set does not contain any elements.
 func (set *Set) IsEmpty() bool {
 	return set.Size() == 0
 }
@@ -68,7 +58,7 @@ func (set *Set) Clear() {
 	set.items = make(map[interface{}]struct{})
 }
 
-// Values returns all items in the set.
+// Values returns all items in the set (Random order).
 func (set *Set) Values() []interface{} {
 	values := make([]interface{}, set.Size())
 	index := 0

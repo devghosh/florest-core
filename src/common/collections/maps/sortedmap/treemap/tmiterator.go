@@ -10,7 +10,7 @@ type Iterator struct {
 }
 
 // HasNext method moves the iterator to the next element and returns true if there was a next
-// element in the collection.
+// element in the map.
 func (iterator *Iterator) HasNext() bool {
 	return iterator.rbIterator.HasNext()
 }

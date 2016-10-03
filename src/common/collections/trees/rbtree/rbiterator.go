@@ -1,14 +1,10 @@
-// Copyright (c) 2015, Emir Pasic. All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
 package rbtree
 
 import (
 	"github.com/jabong/florest-core/src/common/collections"
 )
 
-// Iterator holding the iterator's state
+// Stateful iterator for red black tree
 type Iterator struct {
 	tree       *Tree
 	node       *Node
@@ -23,6 +19,8 @@ const (
 	begin, between, end state = 0, 1, 2
 )
 
+// HasNext method moves the iterator to the next element and returns true if there was a next
+// element in the tree.
 func (iterator *Iterator) HasNext() bool {
 	if !iterator.nextCalled {
 		return iterator.hasNext
@@ -55,10 +53,7 @@ func (iterator *Iterator) HasNext() bool {
 	return false
 }
 
-// Next moves the iterator to the next element and returns true if there was a next element in the container.
-// If Next() returns true, then next element's key and value can be retrieved by Key() and Value().
-// If Next() was called for the first time, then it will point the iterator to the first element if it exists.
-// Modifies the state of the iterator.
+// Next method returns the next element entry if it exists
 func (iterator *Iterator) Next() *collections.Entry {
 	if iterator.HasNext() {
 		iterator.nextCalled = true
@@ -67,7 +62,7 @@ func (iterator *Iterator) Next() *collections.Entry {
 	return nil
 }
 
-// Begin resets the iterator to its initial state (one-before-first)
+// Reset method resets the iterator to its initial state
 // Call Next() to fetch the first element if any.
 func (iterator *Iterator) Reset() {
 	iterator.node = nil

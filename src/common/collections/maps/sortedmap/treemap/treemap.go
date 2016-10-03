@@ -87,6 +87,11 @@ func (m *Map) Iterator() collections.Iterator {
 	return &Iterator{rbIterator: m.tree.Iterator()}
 }
 
+// GetComparator returns the comparator associated with this map
+func (m *Map) GetComparator() collections.Comparator {
+	return m.tree.GetComparator()
+}
+
 // String returns a string representation of container
 func (m *Map) String() string {
 	str := "TreeMap\nmap["

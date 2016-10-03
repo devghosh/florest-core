@@ -39,15 +39,18 @@ func (s *Stack) IsEmpty() bool {
 	return s.size == 0
 }
 
+// Size returns number of elements in the stack.
 func (s *Stack) Size() int {
 	return s.size
 }
 
+// Clear removes all elements from the stack.
 func (s *Stack) Clear() {
 	s.top = nil
 	s.size = 0
 }
 
+// Values returns all values in the stack from top to bottom
 func (s *Stack) Values() []interface{} {
 	current := s.top
 	values := make([]interface{}, s.size)
@@ -60,6 +63,7 @@ func (s *Stack) Values() []interface{} {
 	return values
 }
 
+// Returns true if the given keys are found in the collection
 func (s *Stack) Contains(keys ...interface{}) bool {
 	elements := s.Values()
 	elementsMap := utils.ConvertArrayToMap(elements)
