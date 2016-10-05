@@ -8,6 +8,7 @@ import (
 	"github.com/jabong/florest-core/src/components/mongodb"
 	workflow "github.com/jabong/florest-core/src/core/common/orchestrator"
 	expConf "github.com/jabong/florest-core/src/examples/config"
+	"reflect"
 )
 
 type mongoNode struct {
@@ -48,7 +49,13 @@ func (a mongoNode) Execute(io workflow.WorkFlowData) (workflow.WorkFlowData, err
 	}
 	collection := "florest"
 
-	db, errG := mongodb.Get(mongoConf)
+	err = mongodb.Set("mymongo", mongoConf, reflect.TypeOf(mongodb.MongoDriver{}))
+	if err != nil {
+		msg := fmt.Sprintf("Mongo Set has error %v", err)
+		logger.Error(msg)
+		return io, &constants.AppError{Code: constants.InvalidErrorCode, Message: msg}
+	}
+	db, errG := mongodb.Get("mymongo")
 	if errG != nil {
 		msg := fmt.Sprintf("Mongo Config Not Correct %v", errG)
 		logger.Error(msg)

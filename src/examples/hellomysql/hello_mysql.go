@@ -8,6 +8,7 @@ import (
 	"github.com/jabong/florest-core/src/components/sqldb"
 	workflow "github.com/jabong/florest-core/src/core/common/orchestrator"
 	expConf "github.com/jabong/florest-core/src/examples/config"
+	"reflect"
 )
 
 type mysqlNode struct {
@@ -41,8 +42,14 @@ func (a mysqlNode) Execute(io workflow.WorkFlowData) (workflow.WorkFlowData, err
 		return io, &constants.AppError{Code: constants.InvalidErrorCode, Message: msg}
 	}
 
+	err = sqldb.Set("mysdb", mysqlConf, reflect.TypeOf(sqldb.MysqlDriver{}))
+	if err != nil {
+		msg := " Error in sqldb set"
+		logger.Error(msg)
+		return io, &constants.AppError{Code: constants.InvalidErrorCode, Message: msg}
+	}
 	// get db object
-	db, errG := sqldb.Get(mysqlConf) // It should be called only once and can be shared across go routines
+	db, errG := sqldb.Get("mysdb") // It should be called only once and can be shared across go routines
 	defer func() {
 		if db == nil {
 			return
