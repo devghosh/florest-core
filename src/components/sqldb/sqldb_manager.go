@@ -4,7 +4,7 @@ package sqldb
 func Get(conf *SDBConfig) (ret SDBInterface, err *SDBError) {
 	if conf.DriverName == MYSQL {
 		ret = new(mysqlDriver)
-		err = ret.init(conf)
+		err = ret.Init(conf)
 	} else {
 		err = getErrObj(ErrNoDriver, conf.DriverName+" is not supported")
 	}

@@ -12,7 +12,7 @@ type mongoDriver struct {
 }
 
 // init method
-func (obj *mongoDriver) init(conf *MDBConfig) *MDBError {
+func (obj *mongoDriver) Init(conf *MDBConfig) *MDBError {
 	// set the connection
 	tmp, err := mgo.Dial(conf.URL)
 	if err != nil {

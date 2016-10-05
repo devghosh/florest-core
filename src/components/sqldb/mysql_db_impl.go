@@ -12,7 +12,7 @@ type mysqlDriver struct {
 }
 
 //init intializes and create a mysql connection
-func (obj *mysqlDriver) init(conf *SDBConfig) (aerr *SDBError) {
+func (obj *mysqlDriver) Init(conf *SDBConfig) (aerr *SDBError) {
 	var err error
 	// open connection
 	obj.db, err = sql.Open(MYSQL, fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true&loc=%s",

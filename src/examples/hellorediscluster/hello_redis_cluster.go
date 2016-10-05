@@ -8,6 +8,7 @@ import (
 	"github.com/jabong/florest-core/src/components/cache"
 	workflow "github.com/jabong/florest-core/src/core/common/orchestrator"
 	expConf "github.com/jabong/florest-core/src/examples/config"
+	"reflect"
 )
 
 type redisClusterNode struct {
@@ -49,7 +50,12 @@ func (a redisClusterNode) Execute(io workflow.WorkFlowData) (workflow.WorkFlowDa
 	}
 
 	// get redis object
-	cacheAdapter, errG := cache.Get(*redisConf) // It should be called only once and can be shared across go routines
+	err = cache.Set("myRedisCluster", redisConf, reflect.TypeOf(cache.Redis))
+	if err != nil {
+		msg := fmt.Sprintf("Redis Cluster Set Error - %v", err)
+		return io, &constants.AppError{Code: constants.InvalidErrorCode, Message: msg}
+	}
+	cacheAdapter, errG := cache.Get("myRedisCluster") // It should be called only once and can be shared across go routines
 	if errG != nil {
 		msg := fmt.Sprintf("Redis Cluster Config Error - %v", errG)
 		return io, &constants.AppError{Code: constants.InvalidErrorCode, Message: msg}
