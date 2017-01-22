@@ -217,3 +217,8 @@ To excute all the hello world examples involving redis (`florest/v1/redis/`), mo
    }
 }
 ```
+
+# Documentation
+
+* [Wiki](https://github.com/jabong/florest-core/wiki)
+* [API Doc](https://godoc.org/github.com/jabong/florest-core/src)
