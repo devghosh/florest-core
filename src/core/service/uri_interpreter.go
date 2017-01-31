@@ -57,6 +57,11 @@ func (u URIInterpreter) getResource(data workflow.WorkFlowData) (resource string
 	}
 	logger.Info(fmt.Sprintln("uri is ", uri), rc)
 
+	// remove query parameter if any
+	if index := strings.Index(uri, "?"); index != -1 {
+		uri = uri[:index]
+	}
+	// split on basis of separator
 	uriArr := strings.Split(uri[1:], "/")
 
 	if len(uriArr) >= 2 &&

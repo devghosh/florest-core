@@ -61,4 +61,7 @@ if [ $# -eq 3 ] && [ $3 = "testapp" ]; then
   sleep 15 
   curl "http://localhost:8080/$project_name/v1/hello" > hello.log
   diff "$florest_path/src/test/apptestdata/hello.log" hello.log
+  # query parameter url
+  curl "http://localhost:8080/$project_name/v1/hello?q=1" > hello.log
+  diff "$florest_path/src/test/apptestdata/hello.log" hello.log
 fi
